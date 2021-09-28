@@ -14,12 +14,28 @@ type AdderSubber interface {
 	GetCurrentValue() int
 }
 
+type AddSub struct {
+	val int
+}
+
+func (addSub *AddSub) Add(amount int) {
+	addSub.val += amount
+}
+
+func (addSub *AddSub) Subtract(amount int) {
+	addSub.val -= amount
+}
+
+func (addSub *AddSub) GetCurrentValue() int {
+	return addSub.val
+}
+
 // NewAdderSubber returns a concrete implementation of the AdderSubber interface.
 // The returned AdderSubber will have its sum set to initialSum
 // Note: feel free to define any new types you need to achieve this.
 //		 And remember that receiver arguments (like all Go arguments) are pass-by-value.
 func NewAdderSubber(initialSum int) AdderSubber {
-	return nil // TODO implement
+	return &AddSub { val: initialSum }
 }
 
 // Dog is an interface representing an individual of the species Canis Familiaris
@@ -29,12 +45,12 @@ type Dog interface {
 	// MakeNoise returns a dog noise.
 	MakeNoise() string
 
-	// RollOver returns a boolean indicating whether the dog rolled over as instructed.
-	// If the dog is a good dog it will roll over. If it is not a good dog, it will not.
+	// RollOver returns a boolean depending on whether the dog rolled over as instructed.
+	// If the dog is a good boy he will roll over. If he is not, he will not.
 	RollOver() bool
 
-	// SetIsGoodDog sets a flag indicating whether this Dog is a good dog.
-	SetIsGoodDog(isGoodDog bool)
+	// SetIsGoodBoy sets a flag indicating whether this Dog is a good boy.
+	SetIsGoodBoy(isGoodBoy bool)
 }
 
 // Use this struct when writing your Dog implementation.
@@ -45,9 +61,24 @@ func (n *Barker) MakeNoise() string {
 	return "BARK BARK!!!!"
 }
 
+type Golden struct {
+	Barker
+	isGoodBoy bool
+}
+
+func (g *Golden) RollOver() bool {
+	return g.isGoodBoy
+}
+
+func (g *Golden) SetIsGoodBoy(isGoodBoy bool) {
+	g.isGoodBoy = isGoodBoy
+}
+
 // NewDog returns a concrete struct which meets the Dog interface (see above).
 // To solve this problem, you need use the Barker struct in your Dog implementation.
-// It doesn't matter whether your impl is or is not a good dog by default.
+// It doesn't matter whether your impl is or is not a good boy by default.
 func NewDog() Dog {
-	return nil // TODO implement
+	var dog *Golden = &Golden{ isGoodBoy: true }
+	dog.SetIsGoodBoy(true)
+	return dog
 }
