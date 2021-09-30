@@ -35,7 +35,7 @@ func (addSub *AddSub) GetCurrentValue() int {
 // Note: feel free to define any new types you need to achieve this.
 //		 And remember that receiver arguments (like all Go arguments) are pass-by-value.
 func NewAdderSubber(initialSum int) AdderSubber {
-	return &AddSub { val: initialSum }
+	return &AddSub{val: initialSum}
 }
 
 // Dog is an interface representing an individual of the species Canis Familiaris
@@ -50,7 +50,7 @@ type Dog interface {
 	RollOver() bool
 
 	// SetIsGoodBoy sets a flag indicating whether this Dog is a good boy.
-	SetIsGoodBoy(isGoodBoy bool)
+	SetIsGoodDog(isGoodBoy bool)
 }
 
 // Use this struct when writing your Dog implementation.
@@ -70,7 +70,7 @@ func (g *Golden) RollOver() bool {
 	return g.isGoodBoy
 }
 
-func (g *Golden) SetIsGoodBoy(isGoodBoy bool) {
+func (g *Golden) SetIsGoodDog(isGoodBoy bool) {
 	g.isGoodBoy = isGoodBoy
 }
 
@@ -78,7 +78,7 @@ func (g *Golden) SetIsGoodBoy(isGoodBoy bool) {
 // To solve this problem, you need use the Barker struct in your Dog implementation.
 // It doesn't matter whether your impl is or is not a good boy by default.
 func NewDog() Dog {
-	var dog *Golden = &Golden{ isGoodBoy: true }
-	dog.SetIsGoodBoy(true)
+	var dog *Golden = &Golden{isGoodBoy: true}
+	dog.SetIsGoodDog(true)
 	return dog
 }
